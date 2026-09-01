@@ -52,7 +52,7 @@ environments and develop tools for network infrastructure analysis.
 <tr>
 <td width="50%" valign="top">
 
-### [CLIRadar](https://github.com/bluelightaura/cliradar)
+### [CLIRadar](https://github.com/bluelightaura/CLIRadar)
 
 Vendor-neutral CLI scanner for network devices.
 
@@ -60,6 +60,33 @@ Discovers command trees through contextual help, compares device CLI
 with vendor documentation and generates YAML catalogs and HTML reports.
 
 **Stack:** Python, SSH, Telnet, YAML, Pytest, Ruff, Bandit
+
+</td>
+<td width="50%" valign="top">
+
+### [TRaphy](https://github.com/bluelightaura/traphy)
+
+Terminal traffic generator for L2-L4 equipment testing.
+
+Compose a frame by hand, pick ports from what the target actually has,
+then run: the generated Scapy script ships over SSH and reports counters
+back. Loss is reported only when something was really measuring.
+
+**Stack:** Python, Scapy, Paramiko, SSH, Pytest, Ruff
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### [RestPilot](https://github.com/bluelightaura/restpilot)
+
+Command-line client for REST APIs you did not write.
+
+Imports an OpenAPI contract, keeps environments and tokens out of the
+shell history, and turns the specification into a runnable pytest suite.
+
+**Stack:** Python, Typer, httpx, Pydantic, OpenAPI, Pytest
 
 </td>
 <td width="50%" valign="top">
