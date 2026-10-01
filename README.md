@@ -1,3 +1,7 @@
+![bluelightaura — tests network gear, writes the tools that do the testing](assets/banner.png)
+
+[Русская версия](README_RU.md)
+
 <div align="center">
 
 # Maxim Stepanov
@@ -95,8 +99,9 @@ shell history, and turns the specification into a runnable pytest suite.
 
 Automated deployment of Nginx, Prometheus, Grafana and exporters.
 
-Internal monitoring services are protected from direct Internet access
-and are available through SSH tunnels.
+Built in a mentorship programme under a senior DevOps engineer from a
+big-tech company. Everything inward-facing binds to loopback and is
+reached over an SSH tunnel; only Nginx is published.
 
 **Stack:** Docker, Ansible, Prometheus, Grafana, Nginx
 
