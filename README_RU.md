@@ -27,7 +27,8 @@
 - Тестирование и автоматизация ПО сетевого оборудования
 - Разработка тестовых фреймворков на Python и Pytest
 - Коммутаторы L2/L3, Ethernet, VLAN, STP/RSTP, маршрутизация
-- Генерация и анализ трафика с TRex
+- Генерация и анализ трафика: TRex, DPDK, Scapy
+- Виртуальные стенды на containerlab и FRRouting, отчётность через Allure
 - Тестовые окружения на Linux и CI/CD
 - Мониторинг инфраструктуры на Prometheus и Grafana
 - Расту в сторону SDET, SRE и DevOps
@@ -45,6 +46,9 @@
 ![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Ansible](https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+![TRex](https://img.shields.io/badge/TRex%20%C2%B7%20DPDK-005073?style=for-the-badge)
+![Allure](https://img.shields.io/badge/Allure-2EB67D?style=for-the-badge)
 ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
 ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
 
@@ -72,15 +76,33 @@
 
 Терминальный генератор трафика для тестирования оборудования L2-L4.
 
-Собираешь кадр руками, выбираешь порты из того, что реально есть на цели,
-запускаешь: сгенерированный Scapy-скрипт уезжает по SSH и возвращает
-счётчики. Потери показываются только тогда, когда их действительно мерили.
+Собираешь кадр руками, а дальше выбираешь, чем он уйдёт в провод:
+Scapy-скриптом через ядро или TRex на карте — DPDK на линейной скорости
+либо AF_PACKET, когда карту нельзя забирать у ядра. Сам готовит генератор:
+привязывает карты, пишет `trex_cfg.yaml`, поднимает демона — назвав до
+того, что именно сломает. Потери показываются только тогда, когда их
+действительно мерили, и прогон говорит, какому счётчику поверил.
 
-**Стек:** Python, Scapy, Paramiko, SSH, Pytest, Ruff
+**Стек:** Python, Scapy, TRex, DPDK, Paramiko, SSH, Pytest, Ruff
 
 </td>
 </tr>
 <tr>
+<td width="50%" valign="top">
+
+### [NetBench](https://github.com/bluelightaura/netbench)
+
+Стенд, который поднимает себя сам, и набор, который по нему гоняют.
+
+Топология встаёт контейнерами из одного файла, живёт ровно прогон и
+гасится даже если тесты упали. Четыре слоя, каждый проверяется отдельно:
+Terraform, Ansible и containerlab, pytest по SSH, три пайплайна CI, отчёт
+Allure. Написан образцом архитектуры — склонировать и положить свои
+топологии.
+
+**Стек:** Pytest, containerlab, FRRouting, Ansible, Terraform, Allure
+
+</td>
 <td width="50%" valign="top">
 
 ### [RestPilot](https://github.com/bluelightaura/restpilot)
@@ -90,9 +112,11 @@
 Импортирует контракт OpenAPI, держит окружения и токены вне истории
 шелла и превращает спецификацию в готовый к запуску набор pytest.
 
-**Стек:** Python, Typer, httpx, Pydantic, OpenAPI, Pytest
+**Стек:** Python, Typer, httpx, Pydantic, Jinja2, OpenAPI, Pytest
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### [DevOps Monitoring Stack](https://github.com/bluelightaura/devops-monitoring-stack)
@@ -105,6 +129,8 @@ SSH-туннель; наружу опубликован только Nginx.
 
 **Стек:** Docker, Ansible, Prometheus, Grafana, Nginx
 
+</td>
+<td width="50%" valign="top">
 </td>
 </tr>
 </table>
